@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "docker build -t reply-app:latest .",
-    "start": "echo \"starting server\" && exit 1",
+    "start": "npm run node",
     "node": "ts-node --compiler typescript --project tsconfig.json src/index.ts"
   },
   "author": "Eden Reich <eden.reich@gmail.com>",

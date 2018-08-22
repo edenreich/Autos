@@ -4,7 +4,8 @@ import Router from 'koa-router';
 
 export const router = new Router;
 
-router.get('/', function() {
-    console.log('test');
+router.get('/', async ctx => {
+    ctx.body = 'efwefewf';
+    ctx.status = 200;
 });
 
