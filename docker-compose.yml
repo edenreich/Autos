@@ -1,33 +1,50 @@
-nginx:
-    build: ./nginx
-    links:
-        - node1:node1
-        - node2:node2
-        - node3:node3
-    ports:
-        - "80:80"
-node1:
-    build: ./build/node
-    links:
-        - postgres
-    ports:
-        - "3001"
-node2:
-    build: ./build/node
-    links:
-        - postgres
-    ports:
-        - "3002"
-node3:
-    build: ./build/node
-    links:
-        - postgres
-    ports:
-        - "3003"
-postgres:
-    image: postgres
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: secret
-    ports:
-        - "5432"
+version: '3'
+services:
+    nginx:
+        build: 
+            context: ./build/nginx
+            dockerfile: Dockerfile
+        ports:
+            - "80:80"
+        networks:
+            - appnet
+    node1:
+        build: 
+            context: .
+            dockerfile: ./build/node/Dockerfile
+        ports:
+            - "3000"
+        networks:
+            - appnet
+    node2:
+        build: 
+            context: .
+            dockerfile: ./build/node/Dockerfile
+        links:
+            - postgres
+        ports:
+            - "3000"
+        networks:
+            - appnet
+    node3:
+        build: 
+            context: .
+            dockerfile: ./build/node/Dockerfile
+        links:
+            - postgres
+        ports:
+            - "3000"
+        networks:
+            - appnet
+    postgres:
+        image: postgres
+        restart: always
+        environment:
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        ports:
+            - ${POSTGRES_PORT}
+        networks:
+            - appnet
+networks:
+    appnet:
+        driver: bridge

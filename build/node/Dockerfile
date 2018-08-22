@@ -8,9 +8,7 @@ COPY tsconfig.json .
 
 RUN npm install
 
-COPY src .
-
-RUN npm run build
+COPY src src
 
 EXPOSE 3000
 
