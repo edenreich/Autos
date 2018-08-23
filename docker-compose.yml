@@ -1,6 +1,8 @@
 version: '3'
 services:
     nginx:
+        container_name: nginx
+        hostname: nginx
         build: 
             context: ./build/nginx
             dockerfile: Dockerfile
@@ -8,7 +10,13 @@ services:
             - "80:80"
         networks:
             - appnet
+        depends_on:
+            - node1
+            - node2
+            - node3
     node1:
+        container_name: node1
+        hostname: node1
         build: 
             context: .
             dockerfile: ./build/node/Dockerfile
@@ -16,7 +24,11 @@ services:
             - "3000"
         networks:
             - appnet
+        volumes:
+            - ./src:/app/src
     node2:
+        container_name: node2
+        hostname: node2
         build: 
             context: .
             dockerfile: ./build/node/Dockerfile
@@ -26,7 +38,11 @@ services:
             - "3000"
         networks:
             - appnet
+        volumes:
+            - ./src:/app/src
     node3:
+        container_name: node3
+        hostname: node3
         build: 
             context: .
             dockerfile: ./build/node/Dockerfile
@@ -36,15 +52,27 @@ services:
             - "3000"
         networks:
             - appnet
+        volumes:
+            - ./src:/app/src
     postgres:
-        image: postgres
+        container_name: db
+        hostname: db
+        build: 
+            context: ./build/postgres
         restart: always
         environment:
-            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+            - POSTGRES_DB=${POSTGRES_DB}
+            - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
         ports:
             - ${POSTGRES_PORT}
         networks:
             - appnet
+        volumes:
+            - dbdata:/var/lib/postgresql/data
 networks:
     appnet:
         driver: bridge
+volumes:
+    dbdata:
+        driver: local

@@ -1,11 +1,13 @@
 import Router from 'koa-router';
-//import ManagmentController from '../Controllers/ManagmentController';
+import ManagmentController from '../Controllers/UserManagmentController';
 //@todo implement auth middlewares
 
 export const router = new Router;
 
-router.get('/', async ctx => {
-    ctx.body = 'efwefewf';
+router.get('/', ManagmentController.create);
+
+router.get('/user/:id', async (ctx) => {
+    ctx.body = ctx.params.id;
     ctx.status = 200;
 });
 

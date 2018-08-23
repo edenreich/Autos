@@ -1,15 +1,19 @@
-FROM node:latest
+FROM node:alpine
+
+LABEL maintainer="Eden Reich<eden.reich@gmail.com"
 
 WORKDIR /app
 
+COPY nodemon.json .
 COPY package.json .
 COPY package-lock.json .
 COPY tsconfig.json .
 
 RUN npm install
 
-COPY src src
+ADD ./src ./src
+VOLUME src
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+CMD [ "npm", "run", "start" ]
