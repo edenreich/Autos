@@ -7,6 +7,18 @@ import { config } from './config';
 import { router as web } from './Routes/web';
 import { Server } from './Server';
 
+
+const app = new Koa();
+app.use(web.allowedMethods());
+app.use(bodyParser());
+app.use(helmet());
+app.use(web.routes());
+
+const server = new Server(config);
+server.use(app).listen(config.port);
+
+//@todo implement database connection.
+
 // createConnection({
 //     type: 'postgres',
 //     ...config.db,
@@ -21,16 +33,3 @@ import { Server } from './Server';
 
 //   app.listen(config.port);
 // });
-  
-
-const server = new Server(config);
-
-const app = new Koa();
-app.use(web.allowedMethods());
-app.use(bodyParser());
-app.use(helmet());
-app.use(web.routes());
-
-server.use(app).listen(config.port);
-
-export default server;
