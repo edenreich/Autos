@@ -6,7 +6,9 @@
   "scripts": {
     "test": "mocha -r ts-node/register tests/**/*.ts",
     "build": "docker build -t reply-app:latest .",
-    "start": "nodemon -x npm run node",
+    "start": "npm run node",
+    "watch": "nodemon -x npm run node",
+    "dist": "tsc",
     "node": "ts-node --compiler typescript --project tsconfig.json src/index.ts"
   },
   "author": "Eden Reich <eden.reich@gmail.com>",
