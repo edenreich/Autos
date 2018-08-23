@@ -7,9 +7,15 @@ export default class UserManagmentController
         //
     }
 
-    public static create(ctx: BaseContext) 
+    public static async show(ctx: any) 
+    {
+        ctx.body = `showing..${ctx.params.id}`;
+        ctx.status = 200;
+    }
+
+    public static async create(ctx: BaseContext) 
     {
         ctx.body = "creating..";
-        ctx.status = 200
+        ctx.status = 200;
     }
 }

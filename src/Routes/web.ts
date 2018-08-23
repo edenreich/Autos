@@ -4,10 +4,5 @@ import ManagmentController from '../Controllers/UserManagmentController';
 
 export const router = new Router;
 
-router.get('/', ManagmentController.create);
-
-router.get('/user/:id', async (ctx) => {
-    ctx.body = ctx.params.id;
-    ctx.status = 200;
-});
+router.get('/user/:id', ManagmentController.show);
 
