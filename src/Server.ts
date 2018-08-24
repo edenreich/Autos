@@ -39,8 +39,7 @@ export class Server implements IServer
 
     /**
      * Starts the server on given port.
-     * 
-     * @param port number
+     *
      * @return void
      */
     listen(): void
