@@ -14,22 +14,10 @@ app.use(bodyParser());
 app.use(helmet());
 app.use(web.routes());
 
-const server = new Server(config);
-server.use(app).listen(config.port);
 
-//@todo implement database connection.
-
-// createConnection({
-//     type: 'postgres',
-//     ...config.db,
-//     synchronize: true,
-//     logging: ['warn', 'error'],
-//     entities: ['dist/Models/**/*.js'],
-// }).then(async _connection => {
-//   const app = new Koa();
-
-//   app.use(bodyParser());
-//   app.use(web.routes());
-
-//   app.listen(config.port);
-// });
+createConnection().then(async _connection => {
+    const server = new Server(config);
+    server.use(app).listen();
+}).catch((e) => {
+    console.log("Database Connection failed!");
+});
