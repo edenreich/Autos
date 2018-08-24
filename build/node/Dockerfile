@@ -8,6 +8,7 @@ COPY nodemon.json .
 COPY package.json .
 COPY package-lock.json .
 COPY tsconfig.json .
+COPY ormconfig.json .
 
 RUN npm install
 
@@ -16,4 +17,4 @@ VOLUME src
 
 EXPOSE 3000
 
-CMD [ "npm", "run", "start" ]
+CMD [ "npm", "run", "watch" ]
