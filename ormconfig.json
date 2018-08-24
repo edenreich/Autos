@@ -1,0 +1,16 @@
+{
+    "type": "postgres",
+    "host": "db",
+    "port": 5432,
+    "username": "root",
+    "password": "secret",
+    "database": "reply",
+    "synchronize": true,
+    "logging": [ "warn", "error" ],
+    "entities": [ "src/Models/**/*.ts" ],
+    "migrations": [ "src/Database/migrations/**/*.ts" ],
+    "cli": {
+        "entitiesDir": "src/Models",
+        "migrationsDir": "src/migrations"
+    }
+}

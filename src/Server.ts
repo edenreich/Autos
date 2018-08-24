@@ -43,7 +43,7 @@ export class Server implements IServer
      * @param port number
      * @return void
      */
-    listen(port: number): void
+    listen(): void
     {
         this.app.listen(this.config.port);
 
