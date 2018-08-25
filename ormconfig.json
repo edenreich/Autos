@@ -1,4 +1,5 @@
 {
+    "name": "local",
     "type": "postgres",
     "host": "db",
     "port": 5432,
@@ -11,6 +12,6 @@
     "migrations": [ "src/Database/migrations/**/*.ts" ],
     "cli": {
         "entitiesDir": "src/Models",
-        "migrationsDir": "src/migrations"
+        "migrationsDir": "src/Database/migrations"
     }
 }
