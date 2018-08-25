@@ -7,13 +7,11 @@ import { config } from './config';
 import { router as web } from './Routes/web';
 import { Server } from './Server';
 
-
 const app = new Koa();
 app.use(web.allowedMethods());
 app.use(bodyParser());
 app.use(helmet());
 app.use(web.routes());
-
 
 createConnection().then(async _connection => {
     const server = new Server(config);
