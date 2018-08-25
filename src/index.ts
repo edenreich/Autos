@@ -7,10 +7,20 @@ import { router as web } from './Http/Routes/web';
 import { Server } from './Http/Server';
 
 const app = new Koa();
-app.use(bodyParser());
-app.use(web.routes());
-app.use(web.allowedMethods());
+
+// Before Middlewares
+app.use(bodyParser({
+    onerror: (err, ctx) => {
+        ctx.throw('Invalid JSON. please supply a valid one.', 422);
+    }
+}));
 app.use(helmet());
+
+// Application Routes
+app.use(web.routes());
+
+// After Middlewares
+app.use(web.allowedMethods());
 
 createConnection().then(async _connection => {
     const server = new Server;
