@@ -20,9 +20,7 @@ export default class UsersManagementController
             response.data = [];
             response.message = "no content!";
             response.status = HttpStatus.NO_CONTENT;
-            ctx.body = response;
-            ctx.status = HttpStatus.NO_CONTENT;
-            return;
+            ctx.throw(JSON.stringify(response), HttpStatus.NO_CONTENT);
         }
 
         response.success = true;
@@ -46,17 +44,23 @@ export default class UsersManagementController
             response.success = false;
             response.message = "validation error!";
             response.status = HttpStatus.UNPROCESSABLE_ENTITY;
-            ctx.body = response;
-            ctx.status = HttpStatus.UNPROCESSABLE_ENTITY;
-            return;
+            ctx.throw(JSON.stringify(response), HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
         let user: User = new User;
 
         let password = inputs.user.password || Math.random().toString(36).slice(-8);
+        let gender;
+
+        switch (inputs.user.gender) 
+        {
+            case "male": gender = "male"; break;
+            case "female": gender = "female"; break;
+            default: gender = ""; break;
+        }
 
         user.name = inputs.user.name;
-        user.gender = inputs.user.gender;
+        user.gender = gender;
         user.age = inputs.user.age;
         user.password = await bcrypt.hash(password, 10);
 
@@ -67,7 +71,7 @@ export default class UsersManagementController
         response.success = Object.keys(createdUser).length ? true : false;
         response.message = "success!";
         response.data = createdUser;
-        response.status = 200;
+        response.status = HttpStatus.OK;
 
         ctx.body = response;
         ctx.status = response.status;
@@ -78,6 +82,6 @@ export default class UsersManagementController
      */
     public static async edit(ctx: any): Promise<any>
     {
-
+        
     }
 }
