@@ -8,9 +8,10 @@ COPY nodemon.json .
 COPY package.json .
 COPY package-lock.json .
 COPY tsconfig.json .
-COPY ormconfig.json .
 
-RUN npm install
+RUN apk add --no-cache make gcc g++ python && \
+  npm install --silent && \
+  apk del make gcc g++ python
 
 ADD ./src ./src
 VOLUME src

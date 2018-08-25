@@ -20,56 +20,55 @@ services:
         build: 
             context: .
             dockerfile: ./build/node/Dockerfile
-        ports:
-            - "3000"
         networks:
             - appnet
         volumes:
             - ./src:/app/src
+        env_file:
+            - ./env/ormconfig.env
+            - ./env/app.env
     node2:
         container_name: node2
         hostname: node2
         build: 
             context: .
             dockerfile: ./build/node/Dockerfile
-        links:
+        depends_on:
             - postgres
-        ports:
-            - "3000"
         networks:
             - appnet
         volumes:
             - ./src:/app/src
+        env_file:
+            - ./env/ormconfig.env
+            - ./env/app.env
     node3:
         container_name: node3
         hostname: node3
         build: 
             context: .
             dockerfile: ./build/node/Dockerfile
-        links:
+        depends_on:
             - postgres
-        ports:
-            - "3000"
         networks:
             - appnet
         volumes:
             - ./src:/app/src
+        env_file:
+            - ./env/ormconfig.env
+            - ./env/app.env
     postgres:
         container_name: db
         hostname: db
         build: 
             context: ./build/postgres
         restart: always
-        environment:
-            - POSTGRES_DB=${POSTGRES_DB}
-            - POSTGRES_USER=${POSTGRES_USER}
-            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-        ports:
-            - ${POSTGRES_PORT}
         networks:
             - appnet
         volumes:
             - dbdata:/var/lib/postgresql/data
+        env_file:
+            - ./env/database.env
 networks:
     appnet:
         driver: bridge

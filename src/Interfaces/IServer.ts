@@ -3,5 +3,5 @@ export interface IServer
 {
     use(app: IServer): IServer;
 
-    listen(): void;
+    listen(port?: number): void;
 }
