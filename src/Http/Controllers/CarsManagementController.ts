@@ -94,7 +94,7 @@ export default class CarsManagementController extends ApiController
     {
         let inputs = ctx.request.body;
 
-        if (inputs.hasOwnProperty('car') === false) {
+        if (inputs.hasOwnProperty('car') === false || Object.keys(inputs).length === 0) {
             return await ApiController.respondValidationFailed(ctx, [], "expected car, but none was given!");
         }
 
@@ -139,7 +139,7 @@ export default class CarsManagementController extends ApiController
     {
         let inputs = ctx.request.body;
 
-        if (inputs.hasOwnProperty("car") === false) {
+        if (inputs.hasOwnProperty("car") === false || Object.keys(inputs).length === 0) {
             return await ApiController.respondValidationFailed(ctx, [], "expected car, but none was given!");
         }
 

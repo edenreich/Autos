@@ -10,7 +10,7 @@ export class Inquiry extends BaseEntity
     user_id: number;
 
     @Column()
-    auto_id: number;
+    car_id: number;
 
     @Column()
     pick_up_location_id: number;
@@ -22,5 +22,5 @@ export class Inquiry extends BaseEntity
     pick_up_earliest_time: Date;
 
     @UpdateDateColumn()
-    drop_off_earliest_time: Date;
+    drop_off_latest_time: Date;
 }

@@ -80,7 +80,7 @@ export default class UsersManagementController extends ApiController
     {
         let inputs = ctx.request.body;
 
-        if (inputs.hasOwnProperty("user") === false) {
+        if (inputs.hasOwnProperty("user") === false || Object.keys(inputs).length === 0) {
             return await ApiController.respondValidationFailed(ctx, [], "expected user, but none was given!");
         }
 
@@ -124,7 +124,7 @@ export default class UsersManagementController extends ApiController
     {
         let inputs = ctx.request.body;
 
-        if (inputs.hasOwnProperty("user") === false) {
+        if (inputs.hasOwnProperty("user") === false || Object.keys(inputs).length === 0) {
             return await ApiController.respondValidationFailed(ctx, [], "expected user, but none was given!");
         }
 
