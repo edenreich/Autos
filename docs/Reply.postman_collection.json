@@ -1,0 +1,423 @@
+{
+	"info": {
+		"_postman_id": "36e06a18-1d37-f5f1-9053-6f4c7bb4088c",
+		"name": "Reply",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "User Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"user\": {\n\t\t\"id\": 1,\n\t\t\"name\": \"Eden\",\n\t\t\"gender\": \"male\",\n\t\t\"age\": 29\n\t\t\n\t}\n\n}"
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/users/update",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"users",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Show",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/users/1",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"user\": {\n\t\t\"name\": \"Eden2\",\n\t\t\"gender\": \"male\",\n\t\t\"age\": 29\n\t\t\n\t}\n\n}"
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/users/create",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"users",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Show All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/users",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"user\": {\n\t\t\"id\": 3\n\t}\n\n}"
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/users/delete",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"users",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Car",
+			"item": [
+				{
+					"name": "Car Show All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/cars",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"cars"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Car Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"car\": {\n\t\t\"id\": 1\n\t}\n\n}"
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/cars/delete",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"cars",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Car Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"car\": {\n\t\t\"model\": \"bmw-x\",\n\t\t\"engine\": \"4-cylinder\",\n\t\t\"infotainment_system\": \"tv\",\n\t\t\"interior_design\": \"carbon\",\n\t\t\"coordinate_x\": \"123456\",\n\t\t\"coordinate_y\": \"23123213\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/cars/create",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"cars",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Car Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"car\": {\n\t\t\"id\": 4,\n\t\t\"model\": \"\",\n\t\t\"engine\": \"4-cylinder\",\n\t\t\"infotainment_system\": \"tv\",\n\t\t\"interior_design\": \"carbon\",\n\t\t\"coordinate_x\": \"123456\",\n\t\t\"coordinate_y\": \"23123213\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/cars/update",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"cars",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Car Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/cars/1",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"cars",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Inquiry",
+			"item": [
+				{
+					"name": "Inquiry Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"inquiry\": {\n\t\t\"user_id\": 1,\n\t\t\"car_id\": 1,\n\t\t\"pick_up_location_id\": 1,\n\t\t\"drop_off_location_id\": 1,\n\t\t\"pick_up_earliest_time\": {{$timestamp}},\n\t\t\"drop_off_latest_time\": {{$timestamp}}\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/inquiries/create",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"inquiries",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inquiry Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"inquiry\": {\n\t\t\"user_id\": 1,\n\t\t\"car_id\": 1,\n\t\t\"pick_up_location_id\": 1,\n\t\t\"drop_off_location_id\": 1,\n\t\t\"pick_up_earliest_time\": {{$timestamp}},\n\t\t\"drop_off_latest_time\": {{$timestamp}}\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/inquiries/update",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"inquiries",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inquiry Show All",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/inquiries",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"inquiries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inquiry Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"inquiry\": {\n\t\t\"id\": 1\n\t}\n\n}"
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/inquiries/delete",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"inquiries",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inquiry Show",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/inquiries/1",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"inquiries",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
