@@ -1,4 +1,3 @@
-import { BaseContext } from "koa";
 import { User } from "../../Models/User";
 import { getManager} from "typeorm";
 import { Validator, ValidatorFactory } from "../../Classes/Validator";
@@ -53,7 +52,9 @@ export default class UsersManagementController extends ApiController
 
         let validator: Validator = await ValidatorFactory.make();
 
-        if (await validator.userInvalid(inputs.user)) {
+        await validator.userInvalid(inputs.user);
+
+        if (await validator.fails()) {
             return await ApiController.respondValidationFailed(ctx, validator.errors);
         }
 
@@ -66,11 +67,15 @@ export default class UsersManagementController extends ApiController
         user.age = inputs.user.age;
         user.password = await bcrypt.hash(password, 10);
 
-        let createdUser: User = await user.save();
+        try {
+            let createdUser: User = await user.save();
 
-        delete createdUser.password;
+            delete createdUser.password;
 
-        return await ApiController.respondWithData(ctx, createdUser);
+            return await ApiController.respondWithData(ctx, createdUser);
+        } catch (err) {
+            return await ApiController.respondWithError(ctx);
+        }
     }
 
     /**
@@ -134,10 +139,19 @@ export default class UsersManagementController extends ApiController
 
         try {
             let manager = getManager();
-            let user = await manager.delete(User, inputs.user.id);
+
+            let user: User | undefined = await User.findOne(inputs.user.id, {relations: ["inquiries"]});
             
+            if (! user) {
+                return await ApiController.respondValidationFailed(ctx, [], "user does not exists!");
+            }
+
+            let inquiries = user.inquiries;
+            
+            await manager.delete(User, inputs.user.id)
+
             return await ApiController.respondWithData(ctx, user);
-        } catch (err) {
+        } catch (err) {console.log(err);
             return await ApiController.respondWithError(ctx);
         }
     }

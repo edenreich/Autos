@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from "typeorm";
+import { User } from "../Models/User";
+
 
 @Entity({"name": "inquiries"})
 export class Inquiry extends BaseEntity 
@@ -23,4 +25,8 @@ export class Inquiry extends BaseEntity
 
     @UpdateDateColumn()
     drop_off_latest_time: Date;
+
+    @ManyToOne(type => User)
+    @JoinColumn({name: "user_id"})
+    user: User
 }

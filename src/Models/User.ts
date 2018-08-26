@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, BaseEntity, OneToMany } from "typeorm";
 import { Inquiry } from "./Inquiry"
 
 
@@ -20,6 +20,6 @@ export class User extends BaseEntity
     @Column({"select": false})
     password: string;
 
-    @OneToMany(type => Inquiry, Inquiry => Inquiry.user_id)
-    inquiries: Inquiry[];
+    @OneToMany(type => Inquiry, inquiries => inquiries.user_id)
+    inquiries: Array<Inquiry>;
 }

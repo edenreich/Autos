@@ -10,7 +10,7 @@ export class Validator
     public errors: Array<any> = [];
 
     protected requiredCarAttributes: Array<string> = [
-        'model', 'engine', 
+        'location_id', 'model', 'engine', 
         'infotainment_system', 'interior_design',
         'coordinate_x', 'coordinate_y'
     ];
@@ -19,6 +19,11 @@ export class Validator
         'user_id', 'car_id', 
         'pick_up_location_id', 'drop_off_location_id',
         'pick_up_earliest_time', 'drop_off_latest_time'
+    ];
+
+    protected requiredLocationAttributes: Array<string> = [
+        'name', 'street', 
+        'zip', 'tel'
     ];
 
     /**
@@ -101,6 +106,14 @@ export class Validator
             'comfort': 'comfort',
         };
 
+        if (car.hasOwnProperty('location_id')) {
+            if (isNaN(car.location_id)) {
+                this.errors.push({
+                    model: "location_id must be a number"
+                });
+            }
+        }
+
         if (car.hasOwnProperty('model')) {
             if (models.hasOwnProperty(car.model) === false) {
                 this.errors.push({
@@ -175,7 +188,7 @@ export class Validator
                 error[requiredAttribute] = `${requiredAttribute} is required!`;
                 this.errors.push(error);          
             }
-        })
+        });
 
         if (inquiry.hasOwnProperty('user_id')) {
             if (isNaN(inquiry.user_id)) {
@@ -211,7 +224,7 @@ export class Validator
             }
 
             if (isNaN(inquiry.pick_up_location_id) === false) { 
-                let location = await Location.findOne(inquiry.pick_up_location_id);
+                let location: Location | undefined = await Location.findOne(inquiry.pick_up_location_id);
                 
                 if (! location) {
                     this.errors.push({"pick_up_location_id": "location does not exists!"});
@@ -225,7 +238,7 @@ export class Validator
             }
 
             if (isNaN(inquiry.drop_off_location_id) === false) { 
-                let location = await Location.findOne(inquiry.drop_off_location_id);
+                let location: Location | undefined = await Location.findOne(inquiry.drop_off_location_id);
                 
                 if (! location) {
                     this.errors.push({"drop_off_location_id": "location does not exists!"});
@@ -233,9 +246,28 @@ export class Validator
             }
         }
 
-        return Promise.resolve(this)
+        return Promise.resolve(this);
     }
 
+    /**
+     * Validates the user location inputs.
+     */
+    public locationInvalid(location: any): Promise<this>
+    {
+        this.requiredLocationAttributes.forEach((requiredAttribute: any) => {
+            if (location.hasOwnProperty(requiredAttribute) === false) {
+                let error: any = {};
+                error[requiredAttribute] = `${requiredAttribute} is required!`;
+                this.errors.push(error);          
+            }
+        });
+
+        return Promise.resolve(this);
+    }
+
+    /**
+     * Indicates if the validator fails.
+     */
     public fails()
     {
         return Promise.resolve(this.errors.length ? true : false);

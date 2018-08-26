@@ -2,6 +2,7 @@ import Router from 'koa-router';
 import UsersManagmentController from '../Controllers/UsersManagementController';
 import CarsManagmentController from '../Controllers/CarsManagementController';
 import InquiriesManagmentController from '../Controllers/InquiriesManagementController';
+import LocationsManagementController from '../Controllers/LocationsManagementController';
 //@todo implement auth middlewares
 
 export const router = new Router;
@@ -23,4 +24,10 @@ router.get('/inquiries/:id', InquiriesManagmentController.show);
 router.post('/inquiries/create', InquiriesManagmentController.create);
 router.put('/inquiries/update', InquiriesManagmentController.update);
 router.delete('/inquiries/delete', InquiriesManagmentController.delete);
+
+router.get('/locations', LocationsManagementController.showAll);
+router.get('/locations/:id', LocationsManagementController.show);
+router.post('/locations/create', LocationsManagementController.create);
+router.put('/locations/update', LocationsManagementController.update);
+router.delete('/locations/delete', LocationsManagementController.delete);
 

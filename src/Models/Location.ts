@@ -1,13 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany, JoinColumn } from "typeorm";
+import { Car } from "../Models/Car";
 
 @Entity({"name": "locations"})
 export class Location extends BaseEntity 
 {
     @PrimaryGeneratedColumn()
     id: number;
-
-    @Column()
-    auto_id: number;
 
     @Column({"type": "varchar", "length": 30})
     name: string;
@@ -20,4 +18,7 @@ export class Location extends BaseEntity
 
     @Column({"type": "varchar", "length": 20})
     tel: string;
+
+    @OneToMany(type => Car, cars => cars.id)
+    cars: Array<Car>;
 }

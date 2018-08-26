@@ -61,9 +61,13 @@ export default class InquiriesManagementController extends ApiController
         inquiry.pick_up_earliest_time = inputs.inquiry.pick_up_earliest_time;
         inquiry.drop_off_latest_time = inputs.inquiry.drop_off_latest_time;
 
-        let createdInquiry: Inquiry = await inquiry.save();
+        try {
+            let createdInquiry: Inquiry = await inquiry.save();
 
-        return await ApiController.respondWithData(ctx, createdInquiry);
+            return await ApiController.respondWithData(ctx, createdInquiry);
+        } catch (err) {
+            return await ApiController.respondWithError(ctx);
+        }
     }
 
     /**

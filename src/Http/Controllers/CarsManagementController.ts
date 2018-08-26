@@ -1,4 +1,3 @@
-import { BaseContext } from "koa";
 import { Car } from "../../Models/Car";
 import { getManager} from "typeorm";
 import ApiController from "./ApiController";
@@ -75,6 +74,7 @@ export default class CarsManagementController extends ApiController
 
         let car: Car = new Car;
         
+        car.location_id = inputs.car.location_id;
         car.model = models[inputs.car.model];
         car.engine = engines[inputs.car.engine];
         car.infotainment_system = infotainmentSystems[inputs.car.infotainment_system];
@@ -82,9 +82,13 @@ export default class CarsManagementController extends ApiController
         car.coordinate_x = inputs.car.coordinate_x;
         car.coordinate_y = inputs.car.coordinate_y;
 
-        let createdCar: Car = await car.save();
+        try {
+            let createdCar: Car = await car.save();
 
-        return await ApiController.respondWithData(ctx, createdCar);
+            return await ApiController.respondWithData(ctx, createdCar);
+        } catch (err) {
+            return await ApiController.respondWithError(ctx);
+        }
     }
 
     /**
