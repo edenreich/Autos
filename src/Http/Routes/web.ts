@@ -6,15 +6,21 @@ import InquiriesManagmentController from '../Controllers/InquiriesManagementCont
 
 export const router = new Router;
 
+router.get('/users', UsersManagmentController.showAll);
 router.get('/users/:id', UsersManagmentController.show);
 router.post('/users/create', UsersManagmentController.create);
-router.put('/users/edit', UsersManagmentController.edit);
+router.put('/users/update', UsersManagmentController.update);
+router.delete('/users/delete', UsersManagmentController.delete);
 
+router.get('/cars', CarsManagmentController.showAll);
 router.get('/cars/:id', CarsManagmentController.show);
-
 router.post('/cars/create', CarsManagmentController.create);
+router.put('/cars/update', CarsManagmentController.update);
+router.delete('/cars/delete', CarsManagmentController.delete);
 
-router.get('/inquires/:id', InquiriesManagmentController.show);
-
-router.post('/inquires/create', InquiriesManagmentController.create);
+router.get('/inquiries', InquiriesManagmentController.showAll);
+router.get('/inquiries/:id', InquiriesManagmentController.show);
+router.post('/inquiries/create', InquiriesManagmentController.create);
+router.put('/inquiries/update', InquiriesManagmentController.update);
+router.delete('/inquiries/delete', InquiriesManagmentController.delete);
 
