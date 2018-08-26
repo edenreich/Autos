@@ -1,10 +1,25 @@
+import { User } from '../Models/User';
+import { Car } from '../Models/Car';
+import { Location } from '../Models/Location';
 
 export class Validator 
 {
     /**
      * Stores the input errors.
      */
-    public errors: Array<object> = [];
+    public errors: Array<any> = [];
+
+    protected requiredCarAttributes: Array<string> = [
+        'model', 'engine', 
+        'infotainment_system', 'interior_design',
+        'coordinate_x', 'coordinate_y'
+    ];
+
+    protected requiredInquiryAttributes: Array<string> = [
+        'user_id', 'car_id', 
+        'pick_up_location_id', 'drop_off_location_id',
+        'pick_up_earliest_time', 'drop_off_latest_time'
+    ];
 
     /**
      * Validates the user's inputs.
@@ -54,6 +69,14 @@ export class Validator
      */
     public carInvalid(car: any): Promise<this>
     {
+        this.requiredCarAttributes.forEach((requiredAttribute: any) => {
+            if (car.hasOwnProperty(requiredAttribute) === false) {
+                let error: any = {};
+                error[requiredAttribute] = `${requiredAttribute} is required!`;
+                this.errors.push(error);          
+            }
+        });
+
         let models: any = {
             'bmw-x': 'bmw-x', 
             'bmw-x6': 'bmw-x6',
@@ -84,10 +107,6 @@ export class Validator
                     model: "unknown car model! bmw-x or bmw-x6 ?"
                 });
             }
-        } else {
-            this.errors.push({
-                model: "car model is required!"
-            })
         }
 
         if (car.hasOwnProperty('engine')) {
@@ -96,10 +115,6 @@ export class Validator
                     engine: "unknown car engine! 4-cylinder, 6-cylinder, 8-cylinder or 12-cylinder ?"
                 });
             }
-        } else {
-            this.errors.push({
-                engine: "car engine is required!"
-            })
         }
 
         if (car.hasOwnProperty('infotainment_system')) {
@@ -108,10 +123,6 @@ export class Validator
                     infotainment_system: "unknown car infotainment system! tv, radio or navigation ?"
                 });
             }
-        } else {
-            this.errors.push({
-                infotainment_system: "car infotainment system engine is required!"
-            })
         }
 
         if (car.hasOwnProperty('interior_design')) {
@@ -120,10 +131,6 @@ export class Validator
                     interior_design: "unknown car interior design! leather, carbon or comfort ?"
                 });
             }
-        } else {
-            this.errors.push({
-                interior_design: "car interior design engine is required!"
-            });
         }
 
         if (car.hasOwnProperty('coordinate_x')) {
@@ -138,10 +145,6 @@ export class Validator
                     coordinate_x: "coordinate_x cannot be empty!"
                 }); 
             }
-        } else {
-            this.errors.push({
-                coordinate_x: "car coordinate x is required!"
-            });
         }
 
         if (car.hasOwnProperty('coordinate_y')) {
@@ -156,10 +159,6 @@ export class Validator
                     coordinate_y: "coordinate_y cannot be empty!"
                 }); 
             }
-        } else {
-            this.errors.push({
-                coordinate_y: "car coordinate y is required!"
-            });
         }
 
         return Promise.resolve(this);
@@ -168,9 +167,71 @@ export class Validator
     /**
      * Validates the user's inquiry inputs.
      */
-    public inquiryInvalid(inquiry: any): Promise<this>
+    public async inquiryInvalid(inquiry: any): Promise<this>
     {
+        this.requiredInquiryAttributes.forEach((requiredAttribute: any) => {
+            if (inquiry.hasOwnProperty(requiredAttribute) === false) {
+                let error: any = {};
+                error[requiredAttribute] = `${requiredAttribute} is required!`;
+                this.errors.push(error);          
+            }
+        })
 
+        if (inquiry.hasOwnProperty('user_id')) {
+            if (isNaN(inquiry.user_id)) {
+                this.errors.push({"user_id": "user_id must be a number!"});
+            }
+            
+            if (isNaN(inquiry.user_id) === false) { 
+                let user = await User.findOne(inquiry.user_id);
+                
+                if (! user) {
+                    this.errors.push({"user_id": "user does not exists!"});
+                }
+            }
+        }
+
+        if (inquiry.hasOwnProperty('car_id')) {
+            if (isNaN(inquiry.car_id)) {
+                this.errors.push({"car_id": "car_id must be a number!"});
+            }
+
+            if (isNaN(inquiry.car_id) === false) {
+                let car = await Car.findOne(inquiry.car_id);
+                
+                if (! car) {
+                    this.errors.push({"car_id": "car does not exists!"});
+                }
+            }
+        }
+
+        if (inquiry.hasOwnProperty('pick_up_location_id')) {
+            if (isNaN(inquiry.pick_up_location_id)) {
+                this.errors.push({"pick_up_location_id": "pick_up_location_id must be a number!"});
+            }
+
+            if (isNaN(inquiry.pick_up_location_id) === false) { 
+                let location = await Location.findOne(inquiry.pick_up_location_id);
+                
+                if (! location) {
+                    this.errors.push({"pick_up_location_id": "location does not exists!"});
+                }
+            }
+        }
+
+        if (inquiry.hasOwnProperty('drop_off_location_id')) {
+            if (isNaN(inquiry.drop_off_location_id)) {
+                this.errors.push({"drop_off_location_id": "drop_off_location_id must be a number!"});
+            }
+
+            if (isNaN(inquiry.drop_off_location_id) === false) { 
+                let location = await Location.findOne(inquiry.drop_off_location_id);
+                
+                if (! location) {
+                    this.errors.push({"drop_off_location_id": "location does not exists!"});
+                }
+            }
+        }
 
         return Promise.resolve(this)
     }
