@@ -1,11 +1,10 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import app from '../../src/index';
+import { app } from '../../src/index';
 
 chai.use(chaiHttp);
 const should = chai.should();
 const expect = chai.expect;
-
 
 describe('UserManagment Test', () => {
     describe('GET /user/:id', () => {

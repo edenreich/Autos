@@ -1,6 +1,6 @@
 FROM ubuntu
 
-LABEL maintainer="Eden Reich<eden.reich@gmail.com"
+LABEL maintainer="Eden Reich<eden.reich@gmail.com>"
 
 RUN apt-get update
 

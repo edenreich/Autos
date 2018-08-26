@@ -69,6 +69,20 @@ services:
             - dbdata:/var/lib/postgresql/data
         env_file:
             - ./env/database.env
+    worker:
+        container_name: worker
+        hostname: worker
+        build:
+            context: .
+            dockerfile: ./build/worker/Dockerfile
+        restart: always
+        depends_on:
+            - postgres
+        networks:
+            - appnet
+        env_file:
+            - ./env/ormconfig.env
+            - ./env/app.env
 networks:
     appnet:
         driver: bridge

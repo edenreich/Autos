@@ -19,6 +19,6 @@ VOLUME src
 ADD ./tests ./tests
 VOLUME tests
 
-EXPOSE 3000
+RUN echo '*/10 * * * * /app/node_modules/.bin/ts-node --compiler typescript --project /app/tsconfig.json /app/src/Scheduler/jobs.ts' > /etc/crontabs/root
 
-CMD [ "npm", "run", "watch" ]
+CMD [ "crond", "-f" ]

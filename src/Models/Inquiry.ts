@@ -1,5 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, OneToOne, UpdateDateColumn, ManyToOne, JoinColumn } from "typeorm";
 import { User } from "../Models/User";
+import { Car } from "../Models/Car";
+import { Location } from "../Models/Location";
 
 
 @Entity({"name": "inquiries"})
@@ -29,4 +31,16 @@ export class Inquiry extends BaseEntity
     @ManyToOne(type => User)
     @JoinColumn({name: "user_id"})
     user: User
+
+    @OneToOne(type => Car)
+    @JoinColumn({name: "car_id"})
+    car: Car
+
+    @OneToOne(type => Location)
+    @JoinColumn({name: "pick_up_location_id"})
+    pick_up_location: Location
+
+    @OneToOne(type => Location)
+    @JoinColumn({name: "drop_off_location_id"})
+    drop_off_location: Location
 }

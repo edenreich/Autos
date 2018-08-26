@@ -6,7 +6,7 @@ import { createConnection } from 'typeorm';
 import { router as web } from './Http/Routes/web';
 import { Server } from './Http/Server';
 
-const app = new Koa();
+export const app = new Koa();
 
 // Before Middlewares
 app.use(bodyParser({

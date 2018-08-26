@@ -10,8 +10,7 @@
     "watch": "nodemon -x npm run node",
     "dist": "tsc",
     "node": "ts-node --compiler typescript --project tsconfig.json src/index.ts",
-    "migration:create": "./node_modules/.bin/typeorm migration:create",
-    "migrate": "ts-node ./node_modules/.bin/typeorm migration:create"
+    "monitor": "ts-node --compiler typescript --project tsconfig.json src/Scheduler/jobs.ts"
   },
   "author": "Eden Reich <eden.reich@gmail.com>",
   "license": "MIT",
@@ -29,7 +28,6 @@
     "chai-http": "^4.0.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.3",
-    "ts-node": "^7.0.1",
     "typescript": "^3.0.1"
   },
   "dependencies": {
@@ -40,6 +38,7 @@
     "koa-router": "^7.4.0",
     "pg": "^7.4.3",
     "reflect-metadata": "^0.1.12",
+    "ts-node": "^7.0.1",
     "typeorm": "^0.2.7"
   },
   "engines": {
