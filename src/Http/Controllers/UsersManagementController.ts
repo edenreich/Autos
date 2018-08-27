@@ -140,19 +140,17 @@ export default class UsersManagementController extends ApiController
         try {
             let manager = getManager();
 
-            let user: User | undefined = await User.findOne(inputs.user.id, {relations: ["inquiries"]});
-            
+            let user: User | undefined = await User.findOne(inputs.user.id);
+
             if (! user) {
                 return await ApiController.respondValidationFailed(ctx, [], "user does not exists!");
             }
-
-            let inquiries = user.inquiries;
             
             await manager.delete(User, inputs.user.id)
 
             return await ApiController.respondWithData(ctx, user);
-        } catch (err) {console.log(err);
-            return await ApiController.respondWithError(ctx);
+        } catch (err) {
+            return await ApiController.respondWithError(ctx, 'user does not exists or has a booking, and therefore cannot be deleted!');
         }
     }
 }

@@ -19,6 +19,6 @@ export class Location extends BaseEntity
     @Column({"type": "varchar", "length": 20})
     tel: string;
 
-    @OneToMany(type => Car, cars => cars.id)
+    @OneToMany(type => Car, cars => cars.location_id)
     cars: Array<Car>;
 }

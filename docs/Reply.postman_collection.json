@@ -1,7 +1,8 @@
 {
 	"info": {
-		"_postman_id": "36e06a18-1d37-f5f1-9053-6f4c7bb4088c",
+		"_postman_id": "7b1867a2-189f-e5fa-8779-fdb303cca628",
 		"name": "Reply",
+		"description": "# Introduction\nManagement of users, cars and inquiries.\n\n# Overview\nFor each request you should supply Content-Type application/json headers\n\n# Authentication\nAuthentication is not implemented yet.\n\n# Error Codes\n422 - Unprocessable Entities\n200 - Http OK\n400 - Bad Request",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -9,31 +10,23 @@
 			"name": "User",
 			"item": [
 				{
-					"name": "User Update",
+					"name": "User Show All",
 					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"user\": {\n\t\t\"id\": 1,\n\t\t\"name\": \"Eden\",\n\t\t\"gender\": \"male\",\n\t\t\"age\": 29\n\t\t\n\t}\n\n}"
-						},
+						"method": "GET",
+						"header": [],
+						"body": {},
 						"url": {
-							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/users/update",
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/users",
 							"protocol": "{{PROTOCOL}}",
 							"host": [
 								"{{HOST}}"
 							],
 							"port": "{{PORT}}",
 							"path": [
-								"users",
-								"update"
+								"users"
 							]
-						}
+						},
+						"description": "Retrieves all users."
 					},
 					"response": []
 				},
@@ -59,7 +52,8 @@
 								"users",
 								"1"
 							]
-						}
+						},
+						"description": "Display a user."
 					},
 					"response": []
 				},
@@ -75,7 +69,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"user\": {\n\t\t\"name\": \"Eden2\",\n\t\t\"gender\": \"male\",\n\t\t\"age\": 29\n\t\t\n\t}\n\n}"
+							"raw": "{\n  \"user\": {\n    \"name\": \"Eden2\",\n    \"gender\": \"male\",\n    \"age\": 29\n  }\n}"
 						},
 						"url": {
 							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/users/create",
@@ -88,27 +82,38 @@
 								"users",
 								"create"
 							]
-						}
+						},
+						"description": "Creates a user."
 					},
 					"response": []
 				},
 				{
-					"name": "User Show All",
+					"name": "User Update",
 					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"user\": {\n    \"id\": 1,\n    \"name\": \"Eden\",\n    \"gender\": \"male\",\n    \"age\": 29\n  }\n}"
+						},
 						"url": {
-							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/users",
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/users/update",
 							"protocol": "{{PROTOCOL}}",
 							"host": [
 								"{{HOST}}"
 							],
 							"port": "{{PORT}}",
 							"path": [
-								"users"
+								"users",
+								"update"
 							]
-						}
+						},
+						"description": "Updates a user."
 					},
 					"response": []
 				},
@@ -124,7 +129,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"user\": {\n\t\t\"id\": 3\n\t}\n\n}"
+							"raw": "{\n  \"user\": {\n    \"id\": 1\n  }\n}"
 						},
 						"url": {
 							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/users/delete",
@@ -137,11 +142,13 @@
 								"users",
 								"delete"
 							]
-						}
+						},
+						"description": "Deletes a user."
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "CRUD operations for users."
 		},
 		{
 			"name": "Car",
@@ -162,94 +169,8 @@
 							"path": [
 								"cars"
 							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Car Delete",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"car\": {\n\t\t\"id\": 1\n\t}\n\n}"
 						},
-						"url": {
-							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/cars/delete",
-							"protocol": "{{PROTOCOL}}",
-							"host": [
-								"{{HOST}}"
-							],
-							"port": "{{PORT}}",
-							"path": [
-								"cars",
-								"delete"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Car Create",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"car\": {\n\t\t\"model\": \"bmw-x\",\n\t\t\"engine\": \"4-cylinder\",\n\t\t\"infotainment_system\": \"tv\",\n\t\t\"interior_design\": \"carbon\",\n\t\t\"coordinate_x\": \"123456\",\n\t\t\"coordinate_y\": \"23123213\"\n\t}\n}"
-						},
-						"url": {
-							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/cars/create",
-							"protocol": "{{PROTOCOL}}",
-							"host": [
-								"{{HOST}}"
-							],
-							"port": "{{PORT}}",
-							"path": [
-								"cars",
-								"create"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Car Update",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"car\": {\n\t\t\"id\": 4,\n\t\t\"model\": \"\",\n\t\t\"engine\": \"4-cylinder\",\n\t\t\"infotainment_system\": \"tv\",\n\t\t\"interior_design\": \"carbon\",\n\t\t\"coordinate_x\": \"123456\",\n\t\t\"coordinate_y\": \"23123213\"\n\t}\n}"
-						},
-						"url": {
-							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/cars/update",
-							"protocol": "{{PROTOCOL}}",
-							"host": [
-								"{{HOST}}"
-							],
-							"port": "{{PORT}}",
-							"path": [
-								"cars",
-								"update"
-							]
-						}
+						"description": "Retrieves all cars"
 					},
 					"response": []
 				},
@@ -270,17 +191,13 @@
 								"cars",
 								"1"
 							]
-						}
+						},
+						"description": "Display a car"
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "Inquiry",
-			"item": [
+				},
 				{
-					"name": "Inquiry Create",
+					"name": "Car Create",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -291,25 +208,26 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"inquiry\": {\n\t\t\"user_id\": 1,\n\t\t\"car_id\": 1,\n\t\t\"pick_up_location_id\": 1,\n\t\t\"drop_off_location_id\": 1,\n\t\t\"pick_up_earliest_time\": {{$timestamp}},\n\t\t\"drop_off_latest_time\": {{$timestamp}}\n\t}\n}"
+							"raw": "{\n  \"car\": {\n  \t\"location_id\": 1,\n    \"model\": \"bmw-x\",\n    \"engine\": \"4-cylinder\",\n    \"infotainment_system\": \"tv\",\n    \"interior_design\": \"carbon\",\n    \"coordinate_x\": \"123456\",\n    \"coordinate_y\": \"23123213\"\n  }\n}"
 						},
 						"url": {
-							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/inquiries/create",
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/cars/create",
 							"protocol": "{{PROTOCOL}}",
 							"host": [
 								"{{HOST}}"
 							],
 							"port": "{{PORT}}",
 							"path": [
-								"inquiries",
+								"cars",
 								"create"
 							]
-						}
+						},
+						"description": "Creates a car."
 					},
 					"response": []
 				},
 				{
-					"name": "Inquiry Update",
+					"name": "Car Update",
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -320,23 +238,60 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"inquiry\": {\n\t\t\"user_id\": 1,\n\t\t\"car_id\": 1,\n\t\t\"pick_up_location_id\": 1,\n\t\t\"drop_off_location_id\": 1,\n\t\t\"pick_up_earliest_time\": {{$timestamp}},\n\t\t\"drop_off_latest_time\": {{$timestamp}}\n\t}\n}"
+							"raw": "{\n  \"car\": {\n    \"id\": 4,\n    \"model\": \"bmw-x\",\n    \"engine\": \"4-cylinder\",\n    \"infotainment_system\": \"tv\",\n    \"interior_design\": \"carbon\",\n    \"coordinate_x\": \"123456\",\n    \"coordinate_y\": \"23123213\"\n  }\n}"
 						},
 						"url": {
-							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/inquiries/update",
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/cars/update",
 							"protocol": "{{PROTOCOL}}",
 							"host": [
 								"{{HOST}}"
 							],
 							"port": "{{PORT}}",
 							"path": [
-								"inquiries",
+								"cars",
 								"update"
 							]
-						}
+						},
+						"description": "Updates a car."
 					},
 					"response": []
 				},
+				{
+					"name": "Car Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"car\": {\n    \"id\": 1\n  }\n}"
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/cars/delete",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"cars",
+								"delete"
+							]
+						},
+						"description": "Deletes a car."
+					},
+					"response": []
+				}
+			],
+			"description": "CRUD operations for cars."
+		},
+		{
+			"name": "Inquiry",
+			"item": [
 				{
 					"name": "Inquiry Show All",
 					"request": {
@@ -358,36 +313,8 @@
 							"path": [
 								"inquiries"
 							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Inquiry Delete",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"inquiry\": {\n\t\t\"id\": 1\n\t}\n\n}"
 						},
-						"url": {
-							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/inquiries/delete",
-							"protocol": "{{PROTOCOL}}",
-							"host": [
-								"{{HOST}}"
-							],
-							"port": "{{PORT}}",
-							"path": [
-								"inquiries",
-								"delete"
-							]
-						}
+						"description": "Retrieves all inquiries / demands."
 					},
 					"response": []
 				},
@@ -413,7 +340,247 @@
 								"inquiries",
 								"1"
 							]
-						}
+						},
+						"description": "Display an inquiry / demand."
+					},
+					"response": []
+				},
+				{
+					"name": "Inquiry Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"inquiry\": {\n    \"user_id\": 1,\n    \"car_id\": 1,\n    \"pick_up_location_id\": 1,\n    \"drop_off_location_id\": 1,\n    \"pick_up_earliest_time\": {{$timestamp}},\n    \"drop_off_latest_time\": {{$timestamp}}\n  }\n}"
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/inquiries/create",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"inquiries",
+								"create"
+							]
+						},
+						"description": "Creates an inquiry."
+					},
+					"response": []
+				},
+				{
+					"name": "Inquiry Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"inquiry\": {\n    \"user_id\": 1,\n    \"car_id\": 1,\n    \"pick_up_location_id\": 1,\n    \"drop_off_location_id\": 1,\n    \"pick_up_earliest_time\": {{$timestamp}},\n    \"drop_off_latest_time\": {{$timestamp}}\n  }\n}"
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/inquiries/update",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"inquiries",
+								"update"
+							]
+						},
+						"description": "Updates an inquiry."
+					},
+					"response": []
+				},
+				{
+					"name": "Inquiry Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"inquiry\": {\n    \"id\": 1\n  }\n}"
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/inquiries/delete",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"inquiries",
+								"delete"
+							]
+						},
+						"description": "Deletes an inquiry."
+					},
+					"response": []
+				}
+			],
+			"description": "CRUD operations for inquiries / demands"
+		},
+		{
+			"name": "Location",
+			"item": [
+				{
+					"name": "Location Show All",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/locations",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"locations"
+							]
+						},
+						"description": "Displays all locations."
+					},
+					"response": []
+				},
+				{
+					"name": "Location Show",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/locations/1",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"locations",
+								"1"
+							]
+						},
+						"description": "Displays one location."
+					},
+					"response": []
+				},
+				{
+					"name": "Location Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"location\": {\n\t\t\"name\": \"Hannover\",\n\t\t\"street\": \"Musterstreet\",\n\t\t\"zip\": \"D-12345\",\n\t\t\"tel\": \"0123456789\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/locations/create",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"locations",
+								"create"
+							]
+						},
+						"description": "Creates a new location."
+					},
+					"response": []
+				},
+				{
+					"name": "Location Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"location\": {\n\t\t\"id\": 1,\n\t\t\"name\": \"Stuttgard\",\n\t\t\"street\": \"example street\",\n\t\t\"zip\": \"D-12345\",\n\t\t\"tel\": \"12345678\"\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/locations/update",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"locations",
+								"update"
+							]
+						},
+						"description": "Updates a location."
+					},
+					"response": []
+				},
+				{
+					"name": "Location Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"location\": {\n\t\t\"id\": 1\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{PROTOCOL}}://{{HOST}}:{{PORT}}/locations/delete",
+							"protocol": "{{PROTOCOL}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"locations",
+								"delete"
+							]
+						},
+						"description": "Deletes a location."
 					},
 					"response": []
 				}
