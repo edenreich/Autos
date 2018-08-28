@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, OneToOne, UpdateDateColumn, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column,
+    BaseEntity, CreateDateColumn, UpdateDateColumn, 
+    ManyToOne, JoinColumn } from "typeorm";
 import { User } from "../Models/User";
 import { Car } from "../Models/Car";
 import { Location } from "../Models/Location";
@@ -10,37 +12,49 @@ export class Inquiry extends BaseEntity
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({nullable: false})
     user_id: number;
 
-    @Column()
+    @Column({nullable: false})
     car_id: number;
 
-    @Column()
+    @Column({nullable: false})
     pick_up_location_id: number;
 
-    @Column()
+    @Column({nullable: false})
     drop_off_location_id: number;
 
-    @CreateDateColumn()
+    @Column({type: "timestamp"})
     pick_up_earliest_time: Date;
 
-    @UpdateDateColumn()
+    @Column({type: "timestamp"})
     drop_off_latest_time: Date;
 
-    @ManyToOne(type => User)
+    @Column({type: "boolean", default: false})
+    approved: boolean;
+
+    @Column({nullable: true, type: "text"})
+    remarks: string;
+
+    @ManyToOne(type => User, user => user.inquiries)
     @JoinColumn({name: "user_id"})
     user: User
 
-    @OneToOne(type => Car)
+    @ManyToOne(() => Car, car => car.inquiries)
     @JoinColumn({name: "car_id"})
     car: Car
 
-    @OneToOne(type => Location)
+    @ManyToOne(() => Location, location => location.id)
     @JoinColumn({name: "pick_up_location_id"})
     pick_up_location: Location
 
-    @OneToOne(type => Location)
+    @ManyToOne(() => Location, location => location.id)
     @JoinColumn({name: "drop_off_location_id"})
     drop_off_location: Location
+
+    @UpdateDateColumn({type: "timestamp"})
+    updated_at: Date;
+
+    @CreateDateColumn({type: "timestamp"})
+    created_at: Date;
 }

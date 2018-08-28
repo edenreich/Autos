@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, 
+    BaseEntity, OneToMany, JoinColumn,
+    UpdateDateColumn, CreateDateColumn } from "typeorm";
 import { Car } from "../Models/Car";
 
 @Entity({"name": "locations"})
@@ -7,18 +9,24 @@ export class Location extends BaseEntity
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({"type": "varchar", "length": 30})
+    @Column({nullable: false, type: "varchar", length: 50})
     name: string;
 
-    @Column({"type": "varchar", "length": 50})
+    @Column({nullable: false, type: "varchar", length: 50})
     street: string;
 
-    @Column({"type": "varchar", "length": 20})
+    @Column({nullable: false, type: "varchar", length: 50})
     zip: string;
 
-    @Column({"type": "varchar", "length": 20})
+    @Column({nullable: false, type: "varchar", length: 50})
     tel: string;
 
-    @OneToMany(type => Car, cars => cars.location_id)
+    @OneToMany(() => Car, cars => cars.location_id)
     cars: Array<Car>;
+
+    @UpdateDateColumn({type: "timestamp"})
+    updated_at: Date;
+
+    @CreateDateColumn({type: "timestamp"})
+    created_at: Date;
 }
