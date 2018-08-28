@@ -14,10 +14,10 @@ RUN apk add --no-cache make gcc g++ python && \
   apk del make gcc g++ python
 
 ADD ./src ./src
-VOLUME src
+VOLUME /app/src
 
 ADD ./tests ./tests
-VOLUME tests
+VOLUME /app/tests
 
 EXPOSE 3000
 
