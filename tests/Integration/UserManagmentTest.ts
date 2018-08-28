@@ -1,6 +1,5 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import { request } from 'https';
 
 chai.use(chaiHttp);
 const should = chai.should();
@@ -18,7 +17,7 @@ describe('UserManagment Test', () => {
         });
     });
 
-    describe.only('DELETE /users/delete', () => {
+    describe('DELETE /users/delete', () => {
         it('it does not let to delete a user if a user has an inquiry', async () => {
             // Create an inquiry for the first user.
             let response = await chai.request(baseURI)
