@@ -101,3 +101,5 @@ For easy use please import the postman collection that found in the postman fold
 - Implement authentication / guards.
 - Automate the process of checking incomming inquiries.
 - Build a dashboard to display the locations of the cars using ajax long polling.
+- Implement Caching Service with redis.
+- Write automation testing using mocha.
