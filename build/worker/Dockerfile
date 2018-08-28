@@ -14,11 +14,11 @@ RUN apk add --no-cache make gcc g++ python && \
   apk del make gcc g++ python
 
 ADD ./src ./src
-VOLUME src
+VOLUME /app/src
 
 ADD ./tests ./tests
-VOLUME tests
+VOLUME /app/tests
 
-RUN echo '*/10 * * * * /app/node_modules/.bin/ts-node --compiler typescript --project /app/tsconfig.json /app/src/Scheduler/jobs.ts' > /etc/crontabs/root
+RUN echo '*/5 * * * * cd /app && npm run monitor' > /etc/crontabs/root
 
 CMD [ "crond", "-f" ]
