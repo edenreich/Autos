@@ -1,6 +1,6 @@
 ### Usage
 
-clonse this repoistory
+clone this repoistory:
 ```sh
 $ git clone https://github.com/edenreich/Autos.git [foldername]
 ``` 
