@@ -62,7 +62,7 @@ for all the endpoints you need to pass a valid json object and the headers Conte
 
 ### Examples
 
-#### Create /users/create
+#### Create /locations/create
 
 ```json
 {
