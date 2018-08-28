@@ -9,6 +9,10 @@ export class Validator
      */
     public errors: Array<any> = [];
 
+    protected requiredUserAttributes: Array<string> = [
+        'name', 'age'
+    ];
+
     protected requiredCarAttributes: Array<string> = [
         'location_id', 'model', 'engine', 
         'infotainment_system', 'interior_design',
@@ -31,22 +35,32 @@ export class Validator
      */
     public userInvalid(user: any) 
     {
+        this.requiredUserAttributes.forEach((requiredAttribute: any) => {
+            if (user.hasOwnProperty(requiredAttribute) === false) {
+                let error: any = {};
+                error[requiredAttribute] = `${requiredAttribute} is required!`;
+                this.errors.push(error);          
+            }
+        });
+
         let genders: object = {
             male: "male",
             female: "female"
         }
-
-        if (isNaN(user.name) != true) {
-            this.errors.push({
-                name: "name must be a string!"
-            });
-        } 
         
-        if (user.hasOwnProperty('name') && user.name == "") {
-            this.errors.push({
-                name: "name cannot be empty!"
-            });
-        } 
+        if (user.hasOwnProperty('name')) {
+            if (user.name == "") {
+                this.errors.push({
+                    name: "name cannot be empty!"
+                });
+            }
+
+            if (isNaN(user.name) != true) {
+                this.errors.push({
+                    name: "name must be a string!"
+                });
+            }
+        }
         
         if (user.hasOwnProperty('gender')) {
             if (user.gender == "") {
@@ -62,11 +76,21 @@ export class Validator
             }
         }
 
-        if (isNaN(user.age)) {
-            this.errors.push({
-                age: "age must be number!"
-            }); 
+        if (user.hasOwnProperty('age')) {
+            if (isNaN(user.age)) {
+                this.errors.push({
+                    age: "age must be number!"
+                });
+            }
+
+            if (user.age < 18) {
+                this.errors.push({
+                    age: "user must be at least 18 with driven license to register!"
+                });
+            }
         }
+
+
     }
 
     /**
