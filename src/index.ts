@@ -25,6 +25,10 @@ app.use(web.allowedMethods());
 createConnection().then(async _connection => {
     const server = new Server;
     server.use(app).listen();
-}).catch((e) => {
-    console.log("Database Connection failed!");
+}).catch((err) => {
+    if (process.env.APP_ENV === "testing" || process.env.APP_ENV === "local") {
+        console.log("Database Connection failed!", err);
+    } else {
+        console.log("Database Connection failed!");
+    }
 });
