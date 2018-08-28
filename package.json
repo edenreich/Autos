@@ -4,7 +4,7 @@
   "description": "Test by Reply",
   "main": "dist/index.js",
   "scripts": {
-    "test": "mocha -r ts-node/register tests/**/*.ts",
+    "test": "mocha -r ts-node/register tests/bootstrap.ts tests/**/*.ts",
     "build": "docker build -t reply-app:latest .",
     "start": "npm run node",
     "watch": "nodemon -x npm run node",
@@ -24,6 +24,7 @@
     "@types/koa-helmet": "^3.1.2",
     "@types/koa-router": "^7.0.31",
     "@types/mocha": "^5.2.5",
+    "@types/node": "^10.9.3",
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
     "faker": "^4.1.0",
