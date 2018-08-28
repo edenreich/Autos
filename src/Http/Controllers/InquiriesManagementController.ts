@@ -1,5 +1,6 @@
 import { Inquiry } from "../../Models/Inquiry";
-import { getManager} from "typeorm";
+import { Car } from "../../Models/Car";
+import { getManager, getRepository } from "typeorm";
 import ApiController from "./ApiController";
 import { Validator, ValidatorFactory } from "../../Classes/Validator";
 import moment = require("moment");
@@ -63,6 +64,13 @@ export default class InquiriesManagementController extends ApiController
         inquiry.drop_off_location_id = inputs.inquiry.drop_off_location_id;
         inquiry.pick_up_earliest_time = pick_up_earliest.toDate();
         inquiry.drop_off_latest_time = drop_off_earliest.toDate();
+
+        let car = await getRepository(Car).findOne(inquiry.car_id);
+
+        if (car) {
+            car.is_free = false;
+            car.save();
+        }
 
         try {
             let createdInquiry: Inquiry = await inquiry.save();
