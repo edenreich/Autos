@@ -15,6 +15,11 @@ if you want to seed the database with some dummy data:
 $ docker exec -it node1 npm run seed
 ```
 
+if you want to run all tests:
+```sh
+$ docker exec -it node1 npm run test
+```
+
 ### Endpoints
 
 Here are the endpoints to use this application.
