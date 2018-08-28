@@ -29,12 +29,14 @@ createConnection().then(async connection => {
     // - break out of the loop.
 
     // @todo inquiry constraints could be satesfied ?
-    // - check if car is_free is true
-    // - check if location drop_off and pick_up times are ok
+    // - check if car is_free is true.
+    // - check if location drop_off and pick_up times are ok.
     // - if so:
     //   - set inquiry approved and checked to true.
     //   - set car is_free flag to false.
     //   - break out of the loop.
+    // - otherwise:
+    //   - continue to the next step.
 
     // @todo otherwise, if constraints could not be satesfied ?
     // check for alternative locations and cars with exact match.
