@@ -10,7 +10,7 @@
     "watch": "nodemon -x npm run node",
     "dist": "tsc",
     "node": "ts-node --compiler typescript --project tsconfig.json src/index.ts",
-    "monitor": "ts-node --compiler typescript --project tsconfig.json src/Scheduler/jobs.ts",
+    "monitor": "ts-node --compiler typescript --project tsconfig.json src/Scheduler/inquiries.ts",
     "seed": "ts-node --compiler typescript --project tsconfig.json src/Database/seeders/TableSeeder.ts"
   },
   "author": "Eden Reich <eden.reich@gmail.com>",
