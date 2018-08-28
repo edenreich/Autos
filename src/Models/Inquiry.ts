@@ -33,6 +33,9 @@ export class Inquiry extends BaseEntity
     @Column({type: "boolean", default: false})
     approved: boolean;
 
+    @Column({type: "boolean", default: false})
+    checked: boolean;
+
     @Column({nullable: true, type: "text"})
     remarks: string;
 

@@ -31,7 +31,7 @@ export class Car extends BaseEntity
     @Column({nullable: false, type: "varchar", length: 50})
     coordinate_x: string;
 
-    @Column({default: true})
+    @Column({type: "boolean", default: true})
     is_free: boolean
 
     @ManyToOne(type => Location, location => location.cars)
