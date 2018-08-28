@@ -28,6 +28,8 @@ services:
         env_file:
             - ./env/ormconfig.env
             - ./env/app.env
+        depends_on:
+            - postgres
     node2:
         container_name: node2
         hostname: node2
@@ -44,6 +46,9 @@ services:
         env_file:
             - ./env/ormconfig.env
             - ./env/app.env
+        depends_on:
+            - node1
+            - postgres
     node3:
         container_name: node3
         hostname: node3
@@ -60,6 +65,9 @@ services:
         env_file:
             - ./env/ormconfig.env
             - ./env/app.env
+        depends_on:
+            - node2
+            - postgres
     postgres:
         container_name: db
         hostname: db
@@ -79,8 +87,6 @@ services:
             context: .
             dockerfile: ./build/worker/Dockerfile
         restart: always
-        depends_on:
-            - postgres
         networks:
             - appnet
         volumes:
@@ -88,6 +94,9 @@ services:
         env_file:
             - ./env/ormconfig.env
             - ./env/app.env
+        depends_on:
+            - node3
+            - postgres
 networks:
     appnet:
         driver: bridge
