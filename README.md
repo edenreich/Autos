@@ -18,6 +18,7 @@ $ docker exec -it db npm run seed
 ### Endpoints
 
 Here are the endpoints to use this application.
+for all the endpoints you need to pass a valid json object and the headers Content-Type should be set to application/json.
 
 #### Users
 
@@ -61,7 +62,7 @@ Here are the endpoints to use this application.
 
 ### Examples
 
-#### Create
+#### Create /users/create
 
 ```json
 {
@@ -92,5 +93,13 @@ Here are the endpoints to use this application.
     "status": 200
 }
 ```
+
+For easy use please import the postman collection that found in postman folder.
+
+#### TODO
+
+- Implement authentication / gaurds.
+- Automate the process of checking incomming inquiries.
+- Build a dashboard to display the locations of the cars using ajax long polling.
 
 
