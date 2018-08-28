@@ -19,7 +19,9 @@ createConnection().then(async connection => {
         checked: Equal(false)
     }, relations: ["car", "pick_up_location", "drop_off_location"]});
 
-    // @todo loop each inquiry 
+    console.log(inquiries);
+
+    // @todo loop each inquiry
     
     // @todo inquiry drop_off_location_time is greater than now ?
     // set car is_free flag to true and inquiry checked flag true, and break out of the loop.
