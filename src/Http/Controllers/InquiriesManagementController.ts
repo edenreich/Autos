@@ -2,6 +2,7 @@ import { Inquiry } from "../../Models/Inquiry";
 import { getManager} from "typeorm";
 import ApiController from "./ApiController";
 import { Validator, ValidatorFactory } from "../../Classes/Validator";
+import moment = require("moment");
 
 export default class InquiriesManagementController extends ApiController
 {
@@ -53,13 +54,15 @@ export default class InquiriesManagementController extends ApiController
         }
 
         let inquiry: Inquiry = new Inquiry;
+        let pick_up_earliest: moment.Moment = moment(inputs.inquiry.pick_up_earliest_time);
+        let drop_off_earliest: moment.Moment = moment(inputs.inquiry.drop_off_latest_time);
 
         inquiry.user_id = inputs.inquiry.user_id;
         inquiry.car_id = inputs.inquiry.car_id;
         inquiry.pick_up_location_id = inputs.inquiry.pick_up_location_id;
         inquiry.drop_off_location_id = inputs.inquiry.drop_off_location_id;
-        inquiry.pick_up_earliest_time = inputs.inquiry.pick_up_earliest_time;
-        inquiry.drop_off_latest_time = inputs.inquiry.drop_off_latest_time;
+        inquiry.pick_up_earliest_time = pick_up_earliest.toDate();
+        inquiry.drop_off_latest_time = drop_off_earliest.toDate();
 
         try {
             let createdInquiry: Inquiry = await inquiry.save();
