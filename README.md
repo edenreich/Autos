@@ -12,7 +12,7 @@ $ docker-compose up -d
 
 if you want to seed the database with some dummy data:
 ```sh
-$ docker exec -it db npm run seed
+$ docker exec -it node1 npm run seed
 ```
 
 ### Endpoints
@@ -94,12 +94,10 @@ for all the endpoints you need to pass a valid json object and the headers Conte
 }
 ```
 
-For easy use please import the postman collection that found in postman folder.
+For easy use please import the postman collection that found in the postman folder.
 
 #### TODO
 
-- Implement authentication / gaurds.
+- Implement authentication / guards.
 - Automate the process of checking incomming inquiries.
 - Build a dashboard to display the locations of the cars using ajax long polling.
-
-
