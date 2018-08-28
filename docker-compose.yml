@@ -24,6 +24,7 @@ services:
             - appnet
         volumes:
             - ./src:/app/src
+            - ./tests:/app/tests
         env_file:
             - ./env/ormconfig.env
             - ./env/app.env
@@ -39,6 +40,7 @@ services:
             - appnet
         volumes:
             - ./src:/app/src
+            - ./tests:/app/tests
         env_file:
             - ./env/ormconfig.env
             - ./env/app.env
@@ -54,6 +56,7 @@ services:
             - appnet
         volumes:
             - ./src:/app/src
+            - ./tests:/app/tests
         env_file:
             - ./env/ormconfig.env
             - ./env/app.env
@@ -80,6 +83,8 @@ services:
             - postgres
         networks:
             - appnet
+        volumes:
+            - ./src:/app/src
         env_file:
             - ./env/ormconfig.env
             - ./env/app.env
