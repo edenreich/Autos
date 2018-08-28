@@ -41,6 +41,9 @@ export class Car extends BaseEntity
     @OneToMany(type => Inquiry, inquiry => inquiry.car)
     inquiries: Location;
 
+    @OneToMany(() => Car, car => car.model)
+    alternatives: Array<Car>
+
     @UpdateDateColumn({type: "timestamp"})
     updated_at: Date;
 
