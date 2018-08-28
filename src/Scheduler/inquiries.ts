@@ -24,27 +24,29 @@ createConnection().then(async connection => {
     // @todo loop each inquiry
     
     // @todo inquiry drop_off_location_time is greater than now ?
-    // set car is_free flag to true and inquiry checked flag true, and break out of the loop.
+    // - set car is_free flag to true.
+    // - set inquiry checked flag true.
+    // - break out of the loop.
 
-    // @todo check if the inquiry constraints could be satesfied.
+    // @todo inquiry constraints could be satesfied ?
+    // - check if car is_free is true
+    // - check if location drop_off and pick_up times are ok
+    // - if so, set inquiry approved and checked to true and break out of the loop.
 
-    // @todo constraints could be satesfied ?
-    // set inquiry approved to true, set the related car is_free flag to false to 
-    // and break out of the loop.
-
-    // @todo constraints could not be satesfied ?
+    // @todo otherwise, if constraints could not be satesfied ?
     // check for alternative locations and cars with exact match.
-    // found a car ?
-    // - set inquiry approved to true, set the related car is_free flag to false
-    // - update inquiry car id
-    // break out of the loop.
+    // found a similer car ?
+    // - set inquiry approved and checked to true.
+    // - update inquiry car id.
+    // - set related car is_free to false.
+    // - break out of the loop.
 
-    // @todo mark the inquiry with approved flag set to true.
-    // if false add remarks text to this inquiry.
+    // @todo nothing could be found ? 
+    // - set inquiry checked flag to true.
+    // - set inquiry approved flag to false.
+    // - save remarks text to this inquiry.
 
-    // @todo mark the inquiry with checked flag to true.
-
-    // @todo close the loop.
+    // [loop end].
 
 }).catch(err => {
     if (process.env.APP_ENV == "testing" || process.env.APP_ENV == "local") {
